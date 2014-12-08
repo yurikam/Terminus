@@ -1,5 +1,5 @@
-//yurika and david pcomp final 12/8/14
-//adfrsw
+//Yurika Mulase and David Cihelna
+//Physical Computing Final Poject: Terminus Fall 2014
 
 const int led1 = 11;
 const int led2 = 10;
