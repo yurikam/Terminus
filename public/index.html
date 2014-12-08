@@ -1,0 +1,509 @@
+<html>
+<head>
+	<title>Terminus</title>
+	<style>
+	body { margin: 0; }
+	canvas { width: 100%; height: 100% }
+	</style>
+
+
+
+</head>
+<body>
+	<script src="js/three.min.js"></script>
+
+	<script src="js/Projector.js"></script>
+	<script src="js/CanvasRenderer.js"></script>
+	<script src="js/FlyControls.js"></script>
+	<script src="js/ParallaxBarrierEffect.js"></script>
+
+	<script>
+
+	var scene;
+	var camera;
+	var renderer;
+	var controls;
+
+	var texture_placeholder;
+
+	var mesh;
+	var mesh2;
+	var mesh3;
+	var mesh4;
+	var mesh5;
+	var mesh6;
+	var mesh7;
+	var mesh8;
+	var mesh9;
+	var mesh10;
+	var mesh11;
+	var mesh12;
+
+	var forward;
+	var backward;
+	var left;
+	var right;
+	var up;
+	var down;
+
+	var effect;
+
+	var texture = [], parameters, i, h, color, size;
+
+	var clock = new THREE.Clock();
+
+	init();
+	animate();
+
+	function init() {
+
+	//Set the scene, camera and rendered
+	scene = new THREE.Scene();
+    scene.fog = new THREE.Fog( 0x000000, 1, 500);
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+	camera.position.set(0,10,200);
+
+	var listener = new THREE.AudioListener();
+	camera.add(listener);
+
+	controls = new THREE.FlyControls( camera );
+
+	controls.movementSpeed = 70;
+
+	var sound1 = new THREE.Audio( listener );
+	sound1.load( 'sound/yurika1.mp3');
+	sound1.setRefDistance( 20 );
+	sound1.setLoop(10);
+
+	var sound2 = new THREE.Audio( listener );
+	sound2.load( 'sound/yurika2.mp3');
+	sound2.setRefDistance( 20 );
+	sound2.setLoop(10);
+
+	var sound3 = new THREE.Audio( listener );
+	sound3.load( 'sound/yurika3.mp3');
+	sound3.setRefDistance( 20 );
+	sound3.setLoop(10);
+
+	var sound4 = new THREE.Audio( listener );
+	sound4.load( 'sound/yurika4.mp3');
+	sound4.setRefDistance( 20 );
+	sound4.setLoop(10);
+
+	var sound5 = new THREE.Audio( listener );
+	sound5.load( 'sound/yurika5.mp3');
+	sound5.setRefDistance( 20 );
+	sound5.setLoop(10);
+
+	var sound6 = new THREE.Audio( listener );
+	sound6.load( 'sound/yurika6.mp3');
+	sound6.setRefDistance( 20 );
+	sound6.setLoop(10);
+
+	var sound7 = new THREE.Audio( listener );
+	sound7.load( 'sound/yurika1.mp3');
+	sound7.setRefDistance( 20 );
+	sound7.setLoop(10);
+
+	var sound8 = new THREE.Audio( listener );
+	sound8.load( 'sound/yurika2.mp3');
+	sound8.setRefDistance( 20 );
+	sound8.setLoop(10);
+
+	var sound9 = new THREE.Audio( listener );
+	sound9.load( 'sound/yurika3.mp3');
+	sound9.setRefDistance( 20 );
+	sound9.setLoop(10);
+
+	var sound10 = new THREE.Audio( listener );
+	sound10.load( 'sound/yurika4.mp3');
+	sound10.setRefDistance( 20 );
+	sound10.setLoop(10);
+
+	var sound11 = new THREE.Audio( listener );
+	sound11.load( 'sound/yurika5.mp3');
+	sound11.setRefDistance( 20 );
+	sound11.setLoop(10);
+
+	var sound12 = new THREE.Audio( listener );
+	sound12.load( 'sound/yurika6.mp3');
+	sound12.setRefDistance( 20 );
+	sound12.setLoop(10);
+
+
+
+		//box environment
+	texture_placeholder = document.createElement( 'canvas' );
+	texture_placeholder.width = 128;
+	texture_placeholder.height = 128;
+
+	var context = texture_placeholder.getContext( '2d' );
+	context.fillStyle = 'rgb( 200, 200, 200 )';
+	context.fillRect( 0, 0, texture_placeholder.width, texture_placeholder.height );
+
+
+	var materials1 = [
+
+					loadTexture( 'cyan/left.png' ), // right
+					loadTexture( 'cyan/right.png' ), // left
+					loadTexture( 'cyan/top.png' ), // top
+					loadTexture( 'cyan/bottom.png' ), // bottom
+					loadTexture( 'cyan/back.png' ), // back
+					loadTexture( 'cyan/front.png' )  // front
+
+	];
+
+	mesh = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials1 ) );
+	mesh.scale.x = - 1;
+	scene.add( mesh );
+
+	mesh.add(sound1);
+	//sound1.position.copy( mesh.position );
+	//sound1.position.set(0,0,0);
+
+
+	var materials2 = [
+
+					loadTexture( 'purple/left.png' ), // right
+					loadTexture( 'purple/right.png' ), // left
+					loadTexture( 'purple/top.png' ), // top
+					loadTexture( 'purple/bottom.png' ), // bottom
+					loadTexture( 'purple/back.png' ), // back
+					loadTexture( 'purple/front.png' )  // front
+
+	];
+
+	mesh2 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials2 ) );
+	mesh2.scale.x = - 1;
+	mesh2.position.set (0,0,-401);
+	scene.add( mesh2 );
+
+	mesh2.add(sound6);
+	//sound6.position.copy( mesh2.position );
+	//sound6.position.set(0,0,-400);
+
+
+
+	var materials3 = [
+
+					loadTexture( 'green/left.png' ), // right
+					loadTexture( 'green/right.png' ), // left
+					loadTexture( 'green/top.png' ), // top
+					loadTexture( 'green/bottom.png' ), // bottom
+					loadTexture( 'green/back.png' ), // back
+					loadTexture( 'green/front.png' )  // front
+
+	];
+
+	mesh3 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials3 ) );
+	mesh3.scale.x = - 1;
+	mesh3.position.set (401, 0,-401);
+	scene.add( mesh3 );
+
+	mesh3.add(sound5);
+	//sound5.position.copy( mesh3.position );
+	//sound5.position.set(400,0,-400);
+
+	var materials4 = [
+
+					loadTexture( 'whisp/left.png' ), // right
+					loadTexture( 'whisp/right.png' ), // left
+					loadTexture( 'whisp/top.png' ), // top
+					loadTexture( 'whisp/bottom.png' ), // bottom
+					loadTexture( 'whisp/back.png' ), // back
+					loadTexture( 'whisp/front.png' )  // front
+
+	];
+
+	mesh4 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials4) );
+	mesh4.scale.x = - 1;
+	mesh4.position.set (-401, 0,-401);
+	scene.add( mesh4 );	
+
+	mesh4.add(sound4);
+	//sound4.position.copy( mesh4.position );
+	//sound4.position.set(-400,0,-400);
+
+	var materials5 = [
+
+					loadTexture( 'red/left.png' ), // right
+					loadTexture( 'red/right.png' ), // left
+					loadTexture( 'red/top.png' ), // top
+					loadTexture( 'red/bottom.png' ), // bottom
+					loadTexture( 'red/back.png' ), // back
+					loadTexture( 'red/front.png' )  // front
+
+	];
+
+	mesh5 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials5) );
+	mesh5.scale.x = - 1;
+	mesh5.position.set (-401, 0,0);
+	scene.add( mesh5 );	
+
+	mesh5.add(sound3);
+	//sound3.position.copy( mesh5.position );
+	//sound3.position.set(-400,0,0);
+
+	var materials6 = [
+
+					loadTexture( 'blueglitch/left.png' ), // right
+					loadTexture( 'blueglitch/right.png' ), // left
+					loadTexture( 'blueglitch/top.png' ), // top
+					loadTexture( 'blueglitch/bottom.png' ), // bottom
+					loadTexture( 'blueglitch/back.png' ), // back
+					loadTexture( 'blueglitch/front.png' )  // front
+
+	];
+
+	mesh6 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials6) );
+	mesh6.scale.x = - 1;
+	mesh6.position.set (401, 0,0);
+	scene.add( mesh6 );	
+
+	mesh6.add(sound2);
+	//sound2.position.copy( mesh6.position );
+	//sound2.position.set(400,0,0);
+
+	var materials7 = [
+
+					loadTexture( 'grey/left.png' ), // right
+					loadTexture( 'grey/right.png' ), // left
+					loadTexture( 'grey/top.png' ), // top
+					loadTexture( 'grey/bottom.png' ), // bottom
+					loadTexture( 'grey/back.png' ), // back
+					loadTexture( 'grey/front.png' )  // front
+
+	];
+
+	mesh7 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials7 ) );
+	mesh7.scale.x = - 1;
+	mesh7.position.set (0, 401,0);
+	scene.add( mesh7 );
+
+	mesh7.add(sound12);
+	//sound6.position.copy( mesh7.position );
+
+
+	var materials8 = [
+
+					loadTexture( 'neongrn/left.png' ), // right
+					loadTexture( 'neongrn/right.png' ), // left
+					loadTexture( 'neongrn/top.png' ), // top
+					loadTexture( 'neongrn/bottom.png' ), // bottom
+					loadTexture( 'neongrn/back.png' ), // back
+					loadTexture( 'neongrn/front.png' )  // front
+
+	];
+
+	mesh8 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials8 ) );
+	mesh8.scale.x = - 1;
+	mesh8.position.set (401, 401,0);
+	scene.add( mesh8 );
+
+	mesh8.add(sound10);
+	//sound4.position.copy( mesh8.position );
+
+	var materials9 = [
+
+					loadTexture( 'orange/left.png' ), // right
+					loadTexture( 'orange/right.png' ), // left
+					loadTexture( 'orange/top.png' ), // top
+					loadTexture( 'orange/bottom.png' ), // bottom
+					loadTexture( 'orange/back.png' ), // back
+					loadTexture( 'orange/front.png' )  // front
+
+	];
+
+	mesh9 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials9 ) );
+	mesh9.scale.x = - 1;
+	mesh9.position.set (-401, 401,0);
+	scene.add( mesh9 );
+
+	mesh9.add(sound11);
+	//sound5.position.copy( mesh9.position );
+
+	var materials10 = [
+
+					loadTexture( 'white/left.png' ), // right
+					loadTexture( 'white/right.png' ), // left
+					loadTexture( 'white/top.png' ), // top
+					loadTexture( 'white/bottom.png' ), // bottom
+					loadTexture( 'white/back.png' ), // back
+					loadTexture( 'white/front.png' )  // front
+
+	];
+
+	mesh10 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials10 ) );
+	mesh10.scale.x = - 1;
+	mesh10.position.set (-401, 401,-401);
+	scene.add( mesh10 );
+
+	mesh10.add(sound8);
+	//sound2.position.copy( mesh10.position );
+
+	var materials11 = [
+
+					loadTexture( 'glow/left.png' ), // right
+					loadTexture( 'glow/right.png' ), // left
+					loadTexture( 'glow/top.png' ), // top
+					loadTexture( 'glow/bottom.png' ), // bottom
+					loadTexture( 'glow/back.png' ), // back
+					loadTexture( 'glow/front.png' )  // front
+
+	];
+
+	mesh11 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials11 ) );
+	mesh11.scale.x = - 1;
+	mesh11.position.set (0, 401,-401);
+	scene.add( mesh11 );
+
+	mesh11.add(sound7);
+	//sound1.position.copy( mesh11.position );
+
+	var materials12 = [
+
+					loadTexture( 'black/left.png' ), // right
+					loadTexture( 'black/right.png' ), // left
+					loadTexture( 'black/top.png' ), // top
+					loadTexture( 'black/bottom.png' ), // bottom
+					loadTexture( 'black/back.png' ), // back
+					loadTexture( 'black/front.png' )  // front
+
+	];
+
+	mesh12 = new THREE.Mesh( new THREE.BoxGeometry( 400,400,400, 7, 7, 7 ), new THREE.MeshFaceMaterial( materials12 ) );
+	mesh12.scale.x = - 1;
+	mesh12.position.set (401, 401,-401);
+	scene.add( mesh12 );
+
+	mesh12.add(sound9);
+	//sound3.position.copy( mesh12.position );
+
+
+
+	//particles
+	geometry = new THREE.Geometry();
+
+	for ( i = 0; i < 5000; i ++ ) {
+
+		var vertex = new THREE.Vector3();
+		vertex.x = Math.random() * 2000 - 1000;
+		vertex.y = Math.random() * 2000 - 1000;
+		vertex.z = Math.random() * 2000 - 1000;
+
+		geometry.vertices.push( vertex );
+
+	}
+
+	parameters = [
+		[ [1, 1, 0.5], 5 ],
+		[ [0.95, 1, 0.5], 4 ],
+		[ [0.90, 1, 0.5], 3 ],
+		[ [0.85, 1, 0.5], 2 ],
+		[ [0.80, 1, 0.5], 1 ]
+	];
+
+	for ( i = 0; i < parameters.length; i ++ ) {
+
+		color = parameters[i][0];
+		size  = parameters[i][1];
+
+		texture[i] = new THREE.PointCloudMaterial( { size: size } );
+
+		particles = new THREE.PointCloud( geometry, texture[i] );
+
+		particles.rotation.x = Math.random() * 6;
+		particles.rotation.y = Math.random() * 6;
+		particles.rotation.z = Math.random() * 6;
+
+		scene.add( particles );
+
+	}
+
+
+
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
+	effect = new THREE.ParallaxBarrierEffect( renderer);
+	effect.setSize(window.innerWidth,window.innerHeight);
+
+	window.addEventListener( 'resize', onWindowResize, false );
+
+
+
+	}
+
+	function loadTexture( path ) {
+
+		var texture = new THREE.Texture( texture_placeholder );
+		var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+
+		var image = new Image();
+		image.onload = function () {
+
+			texture.image = this;
+			texture.needsUpdate = true;
+
+		};
+		image.src = path;
+
+		return material;
+
+	}
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+
+		controls.handleResize();
+
+	}
+	function animate() {
+
+		requestAnimationFrame( animate );
+		render();
+
+	}
+
+		//render loop that shows things in screen
+	function render() {
+			//requestAnimationFrame( render );
+
+		var delta = clock.getDelta(),
+		time = clock.getElapsedTime() * 5;
+
+		controls.update( delta );
+		var particletime = Date.now() * 0.00005;
+
+			for ( i = 0; i < scene.children.length; i ++ ) {
+
+					var object = scene.children[ i ];
+
+					if ( object instanceof THREE.PointCloud ) {
+
+						object.rotation.y = particletime * ( i < 4 ? i + 1 : - ( i + 1 ) );
+
+					}
+
+				}
+
+		for ( i = 0; i < texture.length; i ++ ) {
+
+			color = parameters[i][0];
+
+			h = ( 360 * ( color[0] + particletime ) % 360 ) / 360;
+			texture[i].color.setHSL( h, color[1], color[2] );
+
+		}
+		renderer.render( scene, camera );
+		effect.render(scene, camera);		
+	}
+
+	</script>
+</body>
+</html>
